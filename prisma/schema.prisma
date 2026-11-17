@@ -1,0 +1,651 @@
+// Esquema — Sistema de Evaluaciones y Certificación ILUO  (v2: 3 roles, versionado inmutable, auditoría)
+// SQLite en desarrollo; portable a PostgreSQL cambiando `provider`.
+//
+// Convenciones
+//   - Los "enums" se guardan como String y se validan con Zod (lib/domain.ts), para que el mismo
+//     esquema funcione igual en SQLite y PostgreSQL.
+//   - Porcentajes y calificaciones: Float en 0..1 (la UI muestra %). Redondeo a 4 decimales en lib/scoring.ts.
+//   - Nada se borra físicamente: `activo` / `estado` + AuditLog.
+//   - Reglas que Prisma no expresa y que van como SQL en la migración inicial (prisma/sql/integridad.sql):
+//       * una sola ExamenVersion PUBLICADA por Examen (índice único parcial),
+//       * AuditLog de solo inserción (triggers que rechazan UPDATE/DELETE),
+//       * contenido de versiones PUBLICADA/REEMPLAZADA inmutable (triggers en Pregunta, PiezaClave,
+//         DiagramaFlecha, ExamenImagen y en los campos de contenido de ExamenVersion).
+//     Además, todo se valida en la capa de servicio (lib/services/*) — los triggers son la red de seguridad.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ═══════════════════════════════ Usuarios, sesiones, auditoría ═══════════════════════════════
+
+// Roles: SUPERADMIN | ADMIN | LECTURA
+//   SUPERADMIN = LECTURA + gestión de usuarios ADMIN/LECTURA. No edita datos de evaluación.
+//   El primer SUPERADMIN se crea por CLI/seed desde SUPERADMIN_EMAIL / SUPERADMIN_PASSWORD.
+model Usuario {
+  id                  String    @id @default(cuid())
+  email               String    @unique // se guarda en minúsculas
+  nombre              String
+  passwordHash        String // bcrypt
+  rol                 String // SUPERADMIN | ADMIN | LECTURA
+  activo              Boolean   @default(true) // se desactiva, nunca se borra
+  debeCambiarPassword Boolean   @default(false) // true tras alta o restablecimiento
+  creadoPorId         String?
+  creadoEn            DateTime  @default(now())
+  desactivadoEn       DateTime?
+  ultimoAcceso        DateTime?
+
+  creadoPor Usuario?  @relation("UsuarioCreadoPor", fields: [creadoPorId], references: [id])
+  creados   Usuario[] @relation("UsuarioCreadoPor")
+  sesiones  Sesion[]
+
+  asignacionesCreadas     Asignacion[]     @relation("AsignacionCreadaPor")
+  asignacionesCanceladas  Asignacion[]     @relation("AsignacionCanceladaPor")
+  dispositivosRegistrados Dispositivo[]
+  lotesCreados            AsignacionLote[]
+
+  versionesCreadas    ExamenVersion[]      @relation("VersionCreadaPor")
+  versionesPublicadas ExamenVersion[]      @relation("VersionPublicadaPor")
+  intentosAplicados   Intento[]            @relation("IntentoAplicadoPor")
+  intentosAnulados    Intento[]            @relation("IntentoAnuladoPor")
+  teoricasCalificadas RespuestaTeorica[]   @relation("TeoricaCalificadaPor")
+  cambiosNivel        NivelILUOHistorial[]
+  requisitos          RequisitoPersona[]
+  importaciones       Importacion[]
+  auditoria           AuditLog[]
+}
+
+// Cookie httpOnly firmada que contiene solo el id de sesión. Se consulta en cada request,
+// así desactivar un usuario o restablecer su contraseña cierra sus sesiones al instante.
+model Sesion {
+  id              String    @id @default(cuid())
+  usuarioId       String
+  creadaEn        DateTime  @default(now())
+  expiraEn        DateTime
+  revocadaEn      DateTime?
+  userAgent       String?
+  // Modo kiosco: mientras esté activo, la sesión solo puede navegar /kiosco/<intento>;
+  // salir requiere reingresar la contraseña del mismo Admin.
+  kioscoIntentoId String?
+
+  usuario Usuario @relation(fields: [usuarioId], references: [id])
+
+  @@index([usuarioId])
+}
+
+// Solo inserción (triggers en integridad.sql). Snapshots de nombre/rol para que el registro
+// siga siendo legible aunque el usuario cambie después.
+model AuditLog {
+  id            String   @id @default(cuid())
+  fecha         DateTime @default(now())
+  usuarioId     String? // null = sistema / CLI
+  usuarioNombre String
+  rol           String
+  accion        String // CREAR | EDITAR | PUBLICAR | ANULAR | CALIFICAR | ASIGNAR_NIVEL | IMPORTAR | CONFIGURAR | ACTIVAR | DESACTIVAR | RESTABLECER_PASSWORD | LOGIN | ...
+  entidad       String // Examen | ExamenVersion | Intento | RespuestaTeorica | NivelILUO | Persona | Modelo | Configuracion | Importacion | Usuario | ...
+  entidadId     String?
+  resumen       String? // texto legible: "Publicó Highland v2: Se cambiaron las piezas 7 y 12"
+  antes         String? // JSON
+  despues       String? // JSON
+
+  usuario Usuario? @relation(fields: [usuarioId], references: [id])
+
+  @@index([entidad, entidadId])
+  @@index([usuarioId, fecha])
+  @@index([fecha])
+}
+
+// ═══════════════════════════════ Catálogos organizacionales ═══════════════════════════════
+
+model Area {
+  id       String    @id @default(cuid())
+  nombre   String    @unique // MOLDEO, PINTURA, CALIDAD, INDIRECTO, TOOL ROOM
+  orden    Int       @default(0)
+  activo   Boolean   @default(true)
+  personas Persona[]
+}
+
+model Turno {
+  id       String    @id @default(cuid())
+  nombre   String    @unique // 1ER, 2DO, 3ER, ESPECIAL, 4X3
+  orden    Int       @default(0)
+  activo   Boolean   @default(true)
+  personas Persona[]
+}
+
+model Persona {
+  id                 String    @id @default(cuid())
+  numeroEmpleado     String    @unique // llave de negocio; String porque los Excel mezclan "1310" y 1310
+  nombre             String
+  areaId             String
+  turnoId            String
+  puesto             String? // SUP, TEC, SETUP, MAT, COO, OPERADOR, AUDITOR/SWAT…
+  fechaIngresoPuesto DateTime? // base de la regla "≥ 6 meses en el puesto" para el nivel O
+  activo             Boolean   @default(true)
+  notas              String?
+  creadoEn           DateTime  @default(now())
+  actualizadoEn      DateTime  @updatedAt
+
+  area             Area                 @relation(fields: [areaId], references: [id])
+  turno            Turno                @relation(fields: [turnoId], references: [id])
+  intentos         Intento[]
+  asignaciones     Asignacion[]
+  niveles          NivelILUO[]
+  historialNiveles NivelILUOHistorial[]
+  requisitos       RequisitoPersona[]
+
+  @@index([areaId, turnoId])
+}
+
+// ═══════════════════════════════ Modelos / familias ═══════════════════════════════
+
+model Modelo {
+  id           String  @id @default(cuid())
+  slug         String  @unique // "highland", "18rm"…
+  nombre       String  @unique // nombre normalizado: "HIGHLAND"
+  grupo        String // MOLDEO | PINTURA | ENSAMBLES | CALIDAD | POR_CONFIRMAR
+  orden        Int     @default(0) // orden de filas en la matriz ILUO
+  activo       Boolean @default(true)
+  porConfirmar Boolean @default(false) // badge "Por confirmar" (mapeos de confianza baja); el Admin lo quita
+  notaMapeo    String?
+  // "Sin examen en el sistema" se calcula: no tiene ningún Examen con versión PUBLICADA.
+
+  alias            ModeloAlias[]
+  examenes         Examen[]
+  intentos         Intento[]
+  niveles          NivelILUO[]
+  historialNiveles NivelILUOHistorial[]
+}
+
+// "EVERES / HIGHLAND", "ENSAMBLE HIGHLAND", "HIGHAND" → HIGHLAND
+model ModeloAlias {
+  id       String @id @default(cuid())
+  alias    String // texto original, para mostrar
+  aliasKey String @unique // normalizado (mayúsculas, sin acentos, sin puntuación ni espacios dobles)
+  modeloId String
+  modelo   Modelo @relation(fields: [modeloId], references: [id], onDelete: Cascade)
+}
+
+// ═══════════════════════════════ Exámenes versionados ═══════════════════════════════
+
+// Examen = modelo + variante. Las variantes son exámenes distintos del mismo modelo:
+//   "principal" | "primera_certificacion" | "anual" | "sin_practica" | "corta" | …
+model Examen {
+  id                   String  @id @default(cuid())
+  modeloId             String
+  variante             String  @default("principal")
+  nombre               String // "Highland — principal"
+  activo               Boolean @default(true)
+  porConfirmar         Boolean @default(false)
+  // null = usa la configuración global (desactivada por defecto). Ej.: 18RM anual podría ser 12.
+  recertificacionMeses Int?
+
+  modelo       Modelo           @relation(fields: [modeloId], references: [id])
+  versiones    ExamenVersion[]
+  asignaciones Asignacion[]
+  lotes        AsignacionLote[]
+  intentos     Intento[]
+
+  @@unique([modeloId, variante])
+}
+
+// Estados: BORRADOR → PUBLICADA → REEMPLAZADA
+//   - Una sola PUBLICADA por examen (índice único parcial en integridad.sql).
+//   - PUBLICADA y REEMPLAZADA son inmutables. "Editar" = copiar la vigente a un nuevo BORRADOR.
+//   - Al publicar: vigenteDesde (por defecto hoy) + motivoCambio obligatorio (excepto v1);
+//     la anterior pasa a REEMPLAZADA con vigenteHasta = vigenteDesde de la nueva.
+//   - Versión que califica un intento = la vigente en Intento.fechaAplicacion
+//     (vigenteDesde <= fecha < vigenteHasta), no la de captura.
+model ExamenVersion {
+  id                        String    @id @default(cuid())
+  examenId                  String
+  version                   Int // 1, 2, 3… consecutivo por examen
+  estado                    String    @default("BORRADOR") // BORRADOR | PUBLICADA | REEMPLAZADA
+  basadaEnId                String? // versión de la que se copió el borrador
+  // Vigencia (null mientras es BORRADOR)
+  vigenteDesde              DateTime?
+  vigenteHasta              DateTime? // null = vigente actualmente
+  motivoCambio              String?
+  // Contenido calificable
+  pesoFisico                Float     @default(0.9)
+  pesoTeorico               Float     @default(0.1)
+  teoriaMax                 Float     @default(10)
+  modoTeoria                String    @default("MANUAL") // MANUAL (Admin captura 0..teoriaMax, como la columna Ins) | POR_PREGUNTA
+  // Bloques extra del formato
+  incluyePractica           Boolean   @default(false) // "práctica de 3 días (1ª certificación)": 3 fechas en el intento
+  requiereSegundaInspeccion Boolean   @default(false) // "2da inspección por" / firma de calidad: nombre en el intento
+  firmas                    String    @default("[]") // JSON ["operador","calidad"] → líneas de firma en la versión imprimible
+  codigoDocumento           String? // "04 C04 S10 35 1"
+  origenArchivo             String? // archivo/hoja de formatos/ del que se extrajo
+  notas                     String?
+  // Trazabilidad
+  creadoPorId               String?
+  creadoEn                  DateTime  @default(now())
+  publicadoPorId            String?
+  publicadoEn               DateTime?
+
+  examen       Examen          @relation(fields: [examenId], references: [id])
+  basadaEn     ExamenVersion?  @relation("VersionBase", fields: [basadaEnId], references: [id])
+  derivadas    ExamenVersion[] @relation("VersionBase")
+  creadoPor    Usuario?        @relation("VersionCreadaPor", fields: [creadoPorId], references: [id])
+  publicadoPor Usuario?        @relation("VersionPublicadaPor", fields: [publicadoPorId], references: [id])
+  imagenes     ExamenImagen[]
+  preguntas    Pregunta[]
+  piezas       PiezaClave[]
+  intentos     Intento[]
+
+  @@unique([examenId, version])
+  @@index([examenId, estado])
+}
+
+model ExamenImagen {
+  id        String @id @default(cuid())
+  versionId String
+  ruta      String // /examenes/highland/image1.png (se copia por versión: no se sobreescribe)
+  orden     Int    @default(0)
+  ancho     Int?
+  alto      Int?
+
+  version ExamenVersion    @relation(fields: [versionId], references: [id], onDelete: Cascade)
+  flechas DiagramaFlecha[]
+}
+
+// Tipos: OPCION_MULTIPLE | SI_NO | TEXTO_ABIERTO | ETIQUETAR_DIAGRAMA | CONDICIONAL
+//   CONDICIONAL = opción múltiple que solo se muestra si `dependeDe` tiene `dependeDeValor`.
+model Pregunta {
+  id                String  @id @default(cuid())
+  versionId         String
+  orden             Int
+  tipo              String
+  texto             String
+  opciones          String  @default("[]") // JSON [{clave, texto}]; en ETIQUETAR_DIAGRAMA son las zonas
+  respuestaCorrecta String? // JSON; null = TODO. TEXTO_ABIERTO: respuestas esperadas (guía, no automática). ETIQUETAR_DIAGRAMA: va en DiagramaFlecha
+  puntaje           Float? // null = TODO (impide modoTeoria = POR_PREGUNTA)
+  dependeDeId       String?
+  dependeDeValor    String?
+
+  version      ExamenVersion      @relation(fields: [versionId], references: [id], onDelete: Cascade)
+  dependeDe    Pregunta?          @relation("Condicional", fields: [dependeDeId], references: [id])
+  dependientes Pregunta[]         @relation("Condicional")
+  flechas      DiagramaFlecha[]
+  respuestas   RespuestaTeorica[]
+
+  @@unique([versionId, orden])
+}
+
+// Flecha numerada colocada con clic sobre la imagen (coordenadas relativas 0..1).
+model DiagramaFlecha {
+  id           String  @id @default(cuid())
+  preguntaId   String
+  imagenId     String
+  numero       Int // número que el operador ve en la flecha
+  x            Float
+  y            Float
+  angulo       Float   @default(0)
+  zonaCorrecta String? // clave de la zona en Pregunta.opciones; null = TODO
+
+  pregunta Pregunta     @relation(fields: [preguntaId], references: [id], onDelete: Cascade)
+  imagen   ExamenImagen @relation(fields: [imagenId], references: [id], onDelete: Cascade)
+
+  @@unique([preguntaId, numero])
+}
+
+// Piezas físicas de la versión. Nº de piezas = cantidad de filas (no 35 fijo).
+// `numero` es la etiqueta visible y es editable (18RM "1er vez" se salta la 5); `orden` da el orden en la grilla.
+model PiezaClave {
+  id          String  @id @default(cuid())
+  versionId   String
+  orden       Int
+  numero      Int
+  esperado    String? // "G" | "B"; null = TODO (impide publicar)
+  descripcion String? // defecto esperado cuando es Mala (opcional)
+
+  version ExamenVersion @relation(fields: [versionId], references: [id], onDelete: Cascade)
+
+  @@unique([versionId, numero])
+  @@unique([versionId, orden])
+}
+
+// ═══════════════════════════════ Asignaciones y tablets ═══════════════════════════════
+
+// Un usuario (cualquier rol) asigna un examen a un empleado; el empleado lo contesta en una tablet.
+// Estados: PENDIENTE → EN_CURSO → COMPLETADA   |   PENDIENTE → CANCELADA   |   PENDIENTE/EN_CURSO → VENCIDA
+//   - Una sola asignación activa (PENDIENTE | EN_CURSO) por persona × examen   (índice parcial).
+//   - `codigo` único entre asignaciones activas                                (índice parcial).
+//   - COMPLETADA / CANCELADA / VENCIDA son terminales                          (trigger).
+//   - 1 asignación → máximo 1 intento. La FK vive en Intento.asignacionId (@unique) para que
+//     el vínculo se fije al crear el intento y quede protegido por los triggers de Intento.
+//   - La versión NO se fija aquí: se fija al iniciar (Intento.versionId, fechaAplicacion = iniciadoEn).
+model Asignacion {
+  id                String    @id @default(cuid())
+  personaId         String
+  examenId          String
+  codigo            String // 6 caracteres de [A-HJ-NP-Z2-9] (sin 0/O/1/I)
+  estado            String    @default("PENDIENTE")
+  ronda             Int // nº de intentos no anulados de persona × examen + 1
+  modoApertura      String? // ESTA_TABLET | DISPOSITIVO — se conoce al abrirla (null mientras PENDIENTE)
+  asignadoPorId     String
+  asignadoEn        DateTime  @default(now())
+  venceEn           DateTime // asignadoEn + horasVigenciaAsignacion: plazo para EMPEZAR (solo aplica a PENDIENTE)
+  iniciadaEn        DateTime?
+  completadaEn      DateTime?
+  dispositivoId     String? // tablet compartida en la que se abrió
+  abiertaPorId      String? // usuario que la abrió con "Abrir aquí"
+  canceladaPorId    String?
+  canceladaEn       DateTime?
+  motivoCancelacion String?
+  vencidaEn         DateTime?
+  loteId            String? // asignación masiva (mismo examen a varias personas)
+
+  persona      Persona         @relation(fields: [personaId], references: [id])
+  examen       Examen          @relation(fields: [examenId], references: [id])
+  asignadoPor  Usuario         @relation("AsignacionCreadaPor", fields: [asignadoPorId], references: [id])
+  canceladaPor Usuario?        @relation("AsignacionCanceladaPor", fields: [canceladaPorId], references: [id])
+  dispositivo  Dispositivo?    @relation(fields: [dispositivoId], references: [id])
+  lote         AsignacionLote? @relation(fields: [loteId], references: [id])
+  intento      Intento?
+
+  @@index([personaId, examenId, estado])
+  @@index([estado, venceEn])
+  @@index([codigo])
+}
+
+model AsignacionLote {
+  id          String   @id @default(cuid())
+  examenId    String
+  creadoPorId String
+  creadoEn    DateTime @default(now())
+  nota        String? // "Ronda Kappa noviembre"
+
+  examen       Examen       @relation(fields: [examenId], references: [id])
+  creadoPor    Usuario      @relation(fields: [creadoPorId], references: [id])
+  asignaciones Asignacion[]
+}
+
+// Tablet compartida. Flujo de emparejamiento:
+//   1. Admin registra → se genera un código de emparejamiento de un solo uso (se guarda hasheado, vence en minutos).
+//   2. En la tablet se ingresa ese código → el servidor emite un token largo; se guarda solo su hash
+//      y la tablet lo conserva en una cookie httpOnly que únicamente autoriza /kiosco.
+model Dispositivo {
+  id                       String    @id @default(cuid())
+  nombre                   String // "Tablet Calidad 1"
+  ubicacion                String?
+  tokenHash                String?   @unique // null hasta emparejar
+  codigoEmparejamientoHash String?
+  emparejamientoVenceEn    DateTime?
+  emparejadoEn             DateTime?
+  activo                   Boolean   @default(true)
+  registradoPorId          String
+  registradoEn             DateTime  @default(now())
+  ultimoUso                DateTime?
+  revocadoEn               DateTime?
+  revocadoPorId            String?
+
+  registradoPor Usuario       @relation(fields: [registradoPorId], references: [id])
+  asignaciones  Asignacion[]
+  fallos        KioscoFallo[]
+}
+
+// Intentos fallidos de "nº de empleado + código" para el límite intentosCodigoMax / ventanaBloqueoMin.
+// Se cuenta por dispositivo (tablet compartida) o por sesión (Abrir aquí) Y por nº de empleado,
+// para que no se puedan probar códigos de un empleado desde varias tablets.
+model KioscoFallo {
+  id             String   @id @default(cuid())
+  dispositivoId  String?
+  sesionId       String?
+  numeroEmpleado String
+  codigo         String // tal como se tecleó (para auditoría; nunca es un código válido para ese empleado)
+  fecha          DateTime @default(now())
+
+  dispositivo Dispositivo? @relation(fields: [dispositivoId], references: [id])
+
+  @@index([dispositivoId, fecha])
+  @@index([sesionId, fecha])
+  @@index([numeroEmpleado, fecha])
+}
+
+// ═══════════════════════════════ Intentos ═══════════════════════════════
+
+// Estados: EN_CURSO | PENDIENTE_CALIFICAR | FINALIZADO | ANULADO
+//   PENDIENTE_CALIFICAR = hay preguntas abiertas sin calificar (o teoría manual sin capturar): no actualiza ILUO.
+//   "Incompleto" (derivado) = EN_CURSO cuya asignación quedó VENCIDA: el Admin lo anula o lo da por terminado.
+// Cada asignación produce un intento nuevo; un intento terminado nunca se reutiliza.
+// La calificación se guarda como copia y NUNCA se recalcula al cambiar la versión/clave.
+// "Última vez que hizo el examen" se DERIVA de aquí (lib/services/historial.ts), no se guarda en Persona.
+model Intento {
+  id                      String    @id @default(cuid())
+  personaId               String
+  modeloId                String
+  examenId                String? // null solo en importados sin examen en el sistema
+  versionId               String? // fijada al iniciar; null solo en importados sin examen
+  asignacionId            String?   @unique // null en CAPTURA_PAPEL e IMPORTADO
+  fechaAplicacion         DateTime // = iniciadoEn en kiosco; la fecha del papel en captura; define la versión
+  ronda                   Int       @default(1) // copiada de la asignación; en papel se calcula y el Admin puede corregirla
+  modo                    String // KIOSCO (Abrir aquí) | DISPOSITIVO (tablet compartida) | CAPTURA_PAPEL | IMPORTADO
+  estado                  String    @default("EN_CURSO")
+  iniciadoEn              DateTime?
+  enviadoEn               DateTime? // duración = enviadoEn − iniciadoEn
+  // Snapshot del empleado al presentar el examen (los reportes históricos no cambian si lo mueven de área)
+  areaNombre              String?
+  turnoNombre             String?
+  puesto                  String?
+  aplicadoPorId           String? // usuario que lo aplicó (Abrir aquí / captura) o que lo asignó (tablet compartida)
+  aplicadoPorNombre       String? // históricos importados
+  segundaInspeccionNombre String? // si la versión lo pide
+  teoriaManual            Float? // modoTeoria = MANUAL: 0..teoriaMax
+  // ── Copia de la calificación (lib/scoring.ts) ──
+  totalPiezas             Int?
+  aciertos                Int?
+  errores                 Int?
+  teoriaPuntos            Float?
+  pctFisico               Float?
+  pctTeorico              Float?
+  calificacion            Float? // FINAL 0..1
+  resultado               String? // REPROBADO | KAPPA_80 | KAPPA_90
+  pesoFisico              Float? // snapshot de reglas usadas
+  pesoTeorico             Float?
+  teoriaMax               Float?
+  umbral80                Float?
+  umbral90                Float?
+  calificadoEn            DateTime?
+  // ── Migración: valores originales del Excel para reportar discrepancias ──
+  aciertosOriginal        Int?
+  erroresOriginal         Int?
+  calificacionOriginal    Float?
+  importacionId           String?
+  // ── Anulación (no se borra) ──
+  anuladoPorId            String?
+  anuladoEn               DateTime?
+  anuladoMotivo           String?
+  creadoEn                DateTime  @default(now()) // = fecha de captura
+  actualizadoEn           DateTime  @updatedAt
+
+  persona          Persona              @relation(fields: [personaId], references: [id])
+  modelo           Modelo               @relation(fields: [modeloId], references: [id])
+  examen           Examen?              @relation(fields: [examenId], references: [id])
+  version          ExamenVersion?       @relation(fields: [versionId], references: [id])
+  asignacion       Asignacion?          @relation(fields: [asignacionId], references: [id])
+  aplicadoPor      Usuario?             @relation("IntentoAplicadoPor", fields: [aplicadoPorId], references: [id])
+  anuladoPor       Usuario?             @relation("IntentoAnuladoPor", fields: [anuladoPorId], references: [id])
+  importacion      Importacion?         @relation(fields: [importacionId], references: [id])
+  piezas           RespuestaPieza[]
+  teoricas         RespuestaTeorica[]
+  practica         PracticaDia[]
+  nivelesOtorgados NivelILUOHistorial[]
+
+  @@index([personaId, modeloId, fechaAplicacion])
+  @@index([personaId, examenId, fechaAplicacion])
+  @@index([versionId])
+  @@index([estado])
+}
+
+model RespuestaPieza {
+  id        String  @id @default(cuid())
+  intentoId String
+  numero    Int // etiqueta de la pieza en la versión
+  respuesta String // "G" | "B"
+  defecto   String? // texto libre "Defecto" del formato
+  esperado  String // copia de la clave al calificar
+  correcta  Boolean
+
+  intento Intento @relation(fields: [intentoId], references: [id], onDelete: Cascade)
+
+  @@unique([intentoId, numero])
+}
+
+model RespuestaTeorica {
+  id              String    @id @default(cuid())
+  intentoId       String
+  preguntaId      String
+  valor           String // JSON: "B" | "SI" | ["defecto 1","defecto 2","defecto 3"] | {"1":"A","2":"C"} (flecha→zona)
+  correcta        Boolean? // auto en cerradas con respuesta; null en abiertas sin calificar
+  puntos          Float? // auto (POR_PREGUNTA) o manual en TEXTO_ABIERTO
+  calificadaPorId String?
+  calificadaEn    DateTime?
+
+  intento       Intento  @relation(fields: [intentoId], references: [id], onDelete: Cascade)
+  pregunta      Pregunta @relation(fields: [preguntaId], references: [id])
+  calificadaPor Usuario? @relation("TeoricaCalificadaPor", fields: [calificadaPorId], references: [id])
+
+  @@unique([intentoId, preguntaId])
+}
+
+// "PRACTICA DE 3 DIAS (cuando es 1ª certi.)": se captura si la versión la incluye.
+// Si es requisito para otorgar nivel lo decide la configuración `practicaRequerida` (false por defecto).
+model PracticaDia {
+  id          String   @id @default(cuid())
+  intentoId   String
+  dia         Int // 1..3
+  fecha       DateTime
+  observacion String?
+
+  intento Intento @relation(fields: [intentoId], references: [id], onDelete: Cascade)
+
+  @@unique([intentoId, dia])
+}
+
+// ═══════════════════════════════ ILUO ═══════════════════════════════
+
+// Estado actual por persona × modelo (lo que pinta la matriz).
+model NivelILUO {
+  id             String    @id @default(cuid())
+  personaId      String
+  modeloId       String
+  letra          String // I | L | U | O
+  fecha          DateTime
+  origen         String // INTENTO | MANUAL | IMPORTADO | VENCIMIENTO
+  intentoId      String?
+  candidatoO     Boolean   @default(false) // ≥ 90 pero < 6 meses en el puesto
+  fechaEstimadaO DateTime?
+  venceEl        DateTime? // solo si la re-certificación está activa
+  actualizadoEn  DateTime  @updatedAt
+
+  persona Persona @relation(fields: [personaId], references: [id])
+  modelo  Modelo  @relation(fields: [modeloId], references: [id])
+
+  @@unique([personaId, modeloId])
+}
+
+// Bitácora de cambios de nivel (además del AuditLog general), para el historial por celda de la matriz.
+model NivelILUOHistorial {
+  id            String   @id @default(cuid())
+  personaId     String
+  modeloId      String
+  letraAnterior String?
+  letraNueva    String? // null = queda sin nivel (REPROBADO con ULTIMO, o anulación)
+  origen        String // INTENTO | MANUAL | IMPORTADO | VENCIMIENTO
+  intentoId     String?
+  usuarioId     String? // obligatorio en MANUAL
+  motivo        String? // obligatorio en MANUAL (I / L)
+  fecha         DateTime @default(now())
+
+  persona Persona  @relation(fields: [personaId], references: [id])
+  modelo  Modelo   @relation(fields: [modeloId], references: [id])
+  intento Intento? @relation(fields: [intentoId], references: [id])
+  usuario Usuario? @relation(fields: [usuarioId], references: [id])
+
+  @@index([personaId, modeloId, fecha])
+}
+
+// ═══════════════════════════════ Requisitos de ingreso ═══════════════════════════════
+
+model TipoRequisito {
+  id              String             @id @default(cuid())
+  codigo          String             @unique // EXAMEN_SEGURIDAD, EXAMEN_INDUCCION, CHECKLIST_ENTRENAMIENTO, CARGA_DESCARGA_RACKS, EMPAQUE, PINES_33
+  nombre          String
+  soloArea        String? // null = todas; "PINTURA" para racks/empaque/33 pines
+  conCalificacion Boolean            @default(false)
+  orden           Int                @default(0)
+  activo          Boolean            @default(true)
+  personas        RequisitoPersona[]
+}
+
+model RequisitoPersona {
+  id           String    @id @default(cuid())
+  personaId    String
+  tipoId       String
+  estado       String    @default("PENDIENTE") // PENDIENTE | CUMPLIDO | NO_APLICA
+  fecha        DateTime?
+  calificacion Float?
+  usuarioId    String?
+
+  persona Persona       @relation(fields: [personaId], references: [id])
+  tipo    TipoRequisito @relation(fields: [tipoId], references: [id])
+  usuario Usuario?      @relation(fields: [usuarioId], references: [id])
+
+  @@unique([personaId, tipoId])
+}
+
+// ═══════════════════════════════ Configuración ═══════════════════════════════
+
+// Clave-valor tipado con Zod (lib/config.ts). Claves y valores por defecto:
+//   umbralKappa80 = 0.80            umbralKappa90 = 0.90
+//   pesoFisicoDefault = 0.9         pesoTeoricoDefault = 0.1       teoriaMaxDefault = 10
+//   mesesParaO = 6                  criterioNivel = "ULTIMO" | "MEJOR"   (default "ULTIMO")
+//   recertificacionMeses = null     alertaVencimientoDias = 30    (re-certificación desactivada)
+//   practicaRequerida = false       (práctica de 3 días como requisito para otorgar nivel)
+//   recuadroInspeccion = "TEORIA_MANUAL"  (qué representa el recuadro INSPECCIÓN; hoy = teoría 0–10)
+//   mostrarResultadoEnKiosco = false
+//   diasBadgeCambioReciente = 30
+//   horasVigenciaAsignacion = 24 (solo PENDIENTE: tiempo para empezar)   minutosMaxExamen = 120 (EN_CURSO, desde iniciadoEn)
+//   intentosCodigoMax = 5 (por tablet/sesión y por nº de empleado)      ventanaBloqueoMin = 10
+model Configuracion {
+  clave          String   @id
+  valor          String // JSON
+  actualizadoEn  DateTime @updatedAt
+  actualizadoPor String?
+}
+
+// ═══════════════════════════════ Importación ═══════════════════════════════
+
+model Importacion {
+  id        String   @id @default(cuid())
+  tipo      String // PROMEDIOS | MATRIZ | ESTUDIO_KAPPA
+  archivo   String
+  estado    String   @default("PREVIEW") // PREVIEW | APLICADA | DESCARTADA
+  resumen   String   @default("{}") // JSON: importadas, omitidas, advertencias
+  usuarioId String?
+  creadoEn  DateTime @default(now())
+
+  usuario   Usuario?              @relation(fields: [usuarioId], references: [id])
+  problemas ImportacionProblema[]
+  intentos  Intento[]
+}
+
+model ImportacionProblema {
+  id            String  @id @default(cuid())
+  importacionId String
+  severidad     String // ERROR | ADVERTENCIA | INFO
+  hoja          String?
+  celda         String?
+  codigo        String // FECHA_INVALIDA | MODELO_DESCONOCIDO | EMPLEADO_SIN_NUMERO | DISCREPANCIA_ACIERTOS …
+  mensaje       String
+  valorOriginal String?
+
+  importacion Importacion @relation(fields: [importacionId], references: [id], onDelete: Cascade)
+}

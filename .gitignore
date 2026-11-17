@@ -1,0 +1,19 @@
+formatos
+design
+docs
+
+# dependencias / build
+node_modules
+.next*
+out
+next-env.d.ts
+*.tsbuildinfo
+
+# base de datos local y temporales
+prisma/*.db
+prisma/*.db-journal
+tmp
+
+# entorno
+.env
+.env.local

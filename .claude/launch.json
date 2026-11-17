@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dev-preview",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "set NEXT_DIST_DIR=.next-preview&& node node_modules/next/dist/bin/next dev -p 3100"],
+      "port": 3100
+    }
+  ]
+}

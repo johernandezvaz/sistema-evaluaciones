@@ -1,0 +1,9 @@
+node_modules
+.next*
+tmp
+formatos
+design
+public
+data
+prisma/migrations
+package-lock.json

@@ -1,0 +1,2140 @@
+{
+  "_nota": "Generado por scripts/extract_examenes.py. Los valores 'TODO' no existen en los Excel y deben confirmarse con Calidad.",
+  "examenes": [
+    {
+      "archivo": "2.-EXAMEN 33.xlsx",
+      "hoja": "pintura",
+      "md5": "f157df9e44df7686b58021bd8702bcff",
+      "variante": "principal",
+      "slug": "alpine-33",
+      "modelo": "ALPINE 33 (PINES Y CANDADOS)",
+      "grupo": "PINTURA",
+      "confianza": "baja",
+      "nota": "Misma pieza (marco Alpine) que HIGH GLOSS ALPINE y ALPINE[1]. Se asume relación con '33 PINES Y CANDADOS QUEBRADOS' de PROMEDIOS/PINT-26.",
+      "imagenes": [
+        "examenes/alpine-33/image1.png"
+      ],
+      "titulo": "FORMATO DE ESTUDIO KAPPA AREA PINTURA",
+      "campos_encabezado": [
+        "fecha",
+        "modelo",
+        "calificacion",
+        "nombre",
+        "numero_empleado",
+        "area"
+      ],
+      "preguntas": [
+        {
+          "texto": "¿Cuál es el metodo que se utliza para inspeccionar este modelo?",
+          "opciones": [
+            {
+              "clave": "A",
+              "texto": "Cuando se tenga tiempo"
+            },
+            {
+              "clave": "B",
+              "texto": "Inspection visual"
+            },
+            {
+              "clave": "C",
+              "texto": "Solo se empaca"
+            }
+          ],
+          "tipo": "opcion_multiple",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        },
+        {
+          "texto": "Menciona 3 de los principales defectos de esta pieza",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": ""
+            },
+            {
+              "clave": "2",
+              "texto": ""
+            },
+            {
+              "clave": "3",
+              "texto": ""
+            }
+          ],
+          "tipo": "texto_abierto",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "respuestas_esperadas": "TODO"
+        },
+        {
+          "texto": "Señala las partes de la pieza colocando los numeros correspondientes en las flechas",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": "AREA DE PANTALLA"
+            },
+            {
+              "clave": "2",
+              "texto": "AREA DE REJILLA"
+            },
+            {
+              "clave": "3",
+              "texto": "BOTONERA"
+            },
+            {
+              "clave": "4",
+              "texto": "zona A"
+            }
+          ],
+          "tipo": "etiquetar_diagrama",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "nota": "Las flechas son figuras dibujadas sobre la imagen; su posición no se puede mapear a zonas de forma confiable."
+        },
+        {
+          "texto": "¿Se necesita algun equipo o herramienta especial para inspeccionar este modelo?",
+          "opciones": [
+            {
+              "clave": "SI",
+              "texto": "Si"
+            },
+            {
+              "clave": "NO",
+              "texto": "No"
+            }
+          ],
+          "tipo": "si_no",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        },
+        {
+          "texto": "Si la respuesta anterior es SI, ¿Selecciona el inciso que describe el material necesario.",
+          "opciones": [
+            {
+              "clave": "A",
+              "texto": "Zapatos de seguridad y lentes"
+            },
+            {
+              "clave": "B",
+              "texto": "Lentes y guantes"
+            },
+            {
+              "clave": "C",
+              "texto": "Mi equipo de seguridad y guantes y trapos de microfibra"
+            }
+          ],
+          "tipo": "opcion_multiple",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        }
+      ],
+      "casillas_pieza_impresas": 35,
+      "casillas_faltantes_en_formato": [],
+      "columnas_por_pieza": [
+        "Buena",
+        "Mala",
+        "Defecto"
+      ],
+      "numero_piezas_examen": "TODO",
+      "clave_gb": "TODO",
+      "extras": [
+        "INSPECCION"
+      ],
+      "codigo_documento": "04 C04 S10 35 1"
+    },
+    {
+      "archivo": "2.-EXAMEN ALPINE 35.xlsx",
+      "hoja": "MOLDEO",
+      "md5": "d736ce13a589e474dfb26afc4359e819",
+      "variante": "principal",
+      "slug": "alpine-35",
+      "modelo": "ALPINE 35 (BRILLO BAJO)",
+      "grupo": "PINTURA",
+      "confianza": "baja",
+      "nota": "Se asume = 'PIEZA BRILLO BAJO 35' de PROMEDIOS/CALIDAD 26. Hoja llamada MOLDEO pero título dice PINTURA.",
+      "imagenes": [
+        "examenes/alpine-35/image1.png"
+      ],
+      "titulo": "FORMATO DE ESTUDIO KAPPA AREA PINTURA",
+      "campos_encabezado": [
+        "fecha",
+        "modelo",
+        "calificacion",
+        "nombre",
+        "numero_empleado",
+        "area"
+      ],
+      "preguntas": [
+        {
+          "texto": "¿Cuál es el metodo que se utliza para inspeccionar este modelo?",
+          "opciones": [
+            {
+              "clave": "A",
+              "texto": "Cuando se tenga tiempo"
+            },
+            {
+              "clave": "B",
+              "texto": "Inspection visual"
+            },
+            {
+              "clave": "C",
+              "texto": "Solo se empaca"
+            }
+          ],
+          "tipo": "opcion_multiple",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        },
+        {
+          "texto": "Menciona 3 de los principales defectos de esta pieza",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": ""
+            },
+            {
+              "clave": "2",
+              "texto": ""
+            },
+            {
+              "clave": "3",
+              "texto": ""
+            }
+          ],
+          "tipo": "texto_abierto",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "respuestas_esperadas": "TODO"
+        },
+        {
+          "texto": "Señala las partes de la pieza colocando los numeros correspondientes en las flechas",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": "ZONA \"B\""
+            },
+            {
+              "clave": "2",
+              "texto": "ZONA \"A\""
+            },
+            {
+              "clave": "3",
+              "texto": "ZONA \"C\""
+            }
+          ],
+          "tipo": "etiquetar_diagrama",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "nota": "Las flechas son figuras dibujadas sobre la imagen; su posición no se puede mapear a zonas de forma confiable."
+        },
+        {
+          "texto": "¿Se necesita algun equipo o herramienta especial para inspeccionar este modelo?",
+          "opciones": [
+            {
+              "clave": "SI",
+              "texto": "Si"
+            },
+            {
+              "clave": "NO",
+              "texto": "No"
+            }
+          ],
+          "tipo": "si_no",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        },
+        {
+          "texto": "Si la respuesta anterior es SI, ¿Selecciona el inciso que describe el material necesario.",
+          "opciones": [
+            {
+              "clave": "A",
+              "texto": "Zapatos de seguridad y lentes"
+            },
+            {
+              "clave": "B",
+              "texto": "Lentes y guantes"
+            },
+            {
+              "clave": "C",
+              "texto": "Mi equipo de seguridad y guantes y bata"
+            }
+          ],
+          "tipo": "opcion_multiple",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        }
+      ],
+      "casillas_pieza_impresas": 35,
+      "casillas_faltantes_en_formato": [],
+      "columnas_por_pieza": [
+        "Buena",
+        "Mala",
+        "Defecto"
+      ],
+      "numero_piezas_examen": "TODO",
+      "clave_gb": "TODO",
+      "extras": [
+        "INSPECCION"
+      ],
+      "codigo_documento": "04 C04 S10 35 1"
+    },
+    {
+      "archivo": "2.-EXAMEN ALPINE.xlsx",
+      "hoja": "pintura",
+      "md5": "4adf02f2c8524db1171401c85c159f36",
+      "variante": "principal",
+      "slug": "alpine",
+      "modelo": "ALPINE (B1TXX)",
+      "grupo": "PINTURA",
+      "confianza": "media",
+      "nota": "Consola Alpine. En históricos aparece como 'B1TXX ALPINE'.",
+      "imagenes": [
+        "examenes/alpine/image1.png"
+      ],
+      "titulo": "FORMATO DE ESTUDIO KAPPA AREA PINTURA",
+      "campos_encabezado": [
+        "fecha",
+        "modelo",
+        "calificacion",
+        "nombre",
+        "numero_empleado",
+        "area"
+      ],
+      "preguntas": [
+        {
+          "texto": "¿Cuál es el metodo que se utliza para inspeccionar este modelo?",
+          "opciones": [
+            {
+              "clave": "A",
+              "texto": "Cuando se tenga tiempo"
+            },
+            {
+              "clave": "B",
+              "texto": "Inspection visual"
+            },
+            {
+              "clave": "C",
+              "texto": "Solo se empaca"
+            }
+          ],
+          "tipo": "opcion_multiple",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        },
+        {
+          "texto": "Menciona 3 de los principales defectos de esta pieza",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": ""
+            },
+            {
+              "clave": "2",
+              "texto": ""
+            },
+            {
+              "clave": "3",
+              "texto": ""
+            }
+          ],
+          "tipo": "texto_abierto",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "respuestas_esperadas": "TODO"
+        },
+        {
+          "texto": "Señala las partes de la pieza colocando los numeros correspondientes en las flechas",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": "ZONA \"B\""
+            },
+            {
+              "clave": "2",
+              "texto": "ZONA \"A\""
+            },
+            {
+              "clave": "3",
+              "texto": "ZONA \"C\""
+            }
+          ],
+          "tipo": "etiquetar_diagrama",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "nota": "Las flechas son figuras dibujadas sobre la imagen; su posición no se puede mapear a zonas de forma confiable."
+        }
+      ],
+      "casillas_pieza_impresas": 35,
+      "casillas_faltantes_en_formato": [],
+      "columnas_por_pieza": [
+        "Buena",
+        "Mala",
+        "Defecto"
+      ],
+      "numero_piezas_examen": "TODO",
+      "clave_gb": "TODO",
+      "extras": [
+        "INSPECCION",
+        "firma:"
+      ],
+      "codigo_documento": "04 C04 S10 35 1"
+    },
+    {
+      "archivo": "2.-EXAMEN ALPINE[1].xlsx",
+      "hoja": "MOLDEO",
+      "md5": "5e7806822f5f0805c11951f01956b240",
+      "variante": "principal",
+      "slug": "alpine-marco",
+      "modelo": "ALPINE MARCO",
+      "grupo": "PINTURA",
+      "confianza": "baja",
+      "nota": "Idéntico byte a byte a ALPINE[2]. Misma pieza que EXAMEN 33 sin preguntas de equipo. Posible duplicado/obsoleto.",
+      "imagenes": [
+        "examenes/alpine-marco/image1.png"
+      ],
+      "titulo": "FORMATO DE ESTUDIO KAPPA AREA PINTURA",
+      "campos_encabezado": [
+        "fecha",
+        "modelo",
+        "calificacion",
+        "nombre",
+        "numero_empleado",
+        "area"
+      ],
+      "preguntas": [
+        {
+          "texto": "¿Cuál es el metodo que se utliza para inspeccionar este modelo?",
+          "opciones": [
+            {
+              "clave": "A",
+              "texto": "Cuando se tenga tiempo"
+            },
+            {
+              "clave": "B",
+              "texto": "Inspection visual"
+            },
+            {
+              "clave": "C",
+              "texto": "Solo se empaca"
+            }
+          ],
+          "tipo": "opcion_multiple",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        },
+        {
+          "texto": "Menciona 3 de los principales defectos de esta pieza",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": ""
+            },
+            {
+              "clave": "2",
+              "texto": ""
+            },
+            {
+              "clave": "3",
+              "texto": ""
+            }
+          ],
+          "tipo": "texto_abierto",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "respuestas_esperadas": "TODO"
+        },
+        {
+          "texto": "Señala las partes de la pieza colocando los numeros correspondientes en las flechas",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": "ZONA \"B\""
+            },
+            {
+              "clave": "2",
+              "texto": "ZONA \"A\""
+            },
+            {
+              "clave": "3",
+              "texto": "ZONA \"C\""
+            }
+          ],
+          "tipo": "etiquetar_diagrama",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "nota": "Las flechas son figuras dibujadas sobre la imagen; su posición no se puede mapear a zonas de forma confiable."
+        }
+      ],
+      "casillas_pieza_impresas": 35,
+      "casillas_faltantes_en_formato": [],
+      "columnas_por_pieza": [
+        "Buena",
+        "Mala",
+        "Defecto"
+      ],
+      "numero_piezas_examen": "TODO",
+      "clave_gb": "TODO",
+      "extras": [
+        "INSPECCION",
+        "Firma:"
+      ],
+      "codigo_documento": "04 C04 S10 35 1"
+    },
+    {
+      "archivo": "2.-EXAMEN ALPINE[2].xlsx",
+      "hoja": "MOLDEO",
+      "md5": "5e7806822f5f0805c11951f01956b240",
+      "variante": "principal",
+      "slug": "alpine-marco",
+      "modelo": "ALPINE MARCO",
+      "grupo": "PINTURA",
+      "confianza": "baja",
+      "nota": "Duplicado exacto de ALPINE[1]. Se ignora en el seed.",
+      "duplicado_de": "2.-EXAMEN ALPINE[1].xlsx",
+      "imagenes": [],
+      "titulo": "FORMATO DE ESTUDIO KAPPA AREA PINTURA",
+      "campos_encabezado": [
+        "fecha",
+        "modelo",
+        "calificacion",
+        "nombre",
+        "numero_empleado",
+        "area"
+      ],
+      "preguntas": [
+        {
+          "texto": "¿Cuál es el metodo que se utliza para inspeccionar este modelo?",
+          "opciones": [
+            {
+              "clave": "A",
+              "texto": "Cuando se tenga tiempo"
+            },
+            {
+              "clave": "B",
+              "texto": "Inspection visual"
+            },
+            {
+              "clave": "C",
+              "texto": "Solo se empaca"
+            }
+          ],
+          "tipo": "opcion_multiple",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        },
+        {
+          "texto": "Menciona 3 de los principales defectos de esta pieza",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": ""
+            },
+            {
+              "clave": "2",
+              "texto": ""
+            },
+            {
+              "clave": "3",
+              "texto": ""
+            }
+          ],
+          "tipo": "texto_abierto",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "respuestas_esperadas": "TODO"
+        },
+        {
+          "texto": "Señala las partes de la pieza colocando los numeros correspondientes en las flechas",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": "ZONA \"B\""
+            },
+            {
+              "clave": "2",
+              "texto": "ZONA \"A\""
+            },
+            {
+              "clave": "3",
+              "texto": "ZONA \"C\""
+            }
+          ],
+          "tipo": "etiquetar_diagrama",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "nota": "Las flechas son figuras dibujadas sobre la imagen; su posición no se puede mapear a zonas de forma confiable."
+        }
+      ],
+      "casillas_pieza_impresas": 35,
+      "casillas_faltantes_en_formato": [],
+      "columnas_por_pieza": [
+        "Buena",
+        "Mala",
+        "Defecto"
+      ],
+      "numero_piezas_examen": "TODO",
+      "clave_gb": "TODO",
+      "extras": [
+        "INSPECCION",
+        "Firma:"
+      ],
+      "codigo_documento": "04 C04 S10 35 1"
+    },
+    {
+      "archivo": "2.-EXAMEN BEZEL.xlsx",
+      "hoja": "MOLDEO",
+      "md5": "4e0ce38ffb8c9b2dcff5a2b877645ee2",
+      "variante": "principal",
+      "slug": "bezel-inj",
+      "modelo": "FAMILIA BEZEL INJ",
+      "grupo": "MOLDEO",
+      "confianza": "alta",
+      "nota": "",
+      "imagenes": [
+        "examenes/bezel-inj/image1.png"
+      ],
+      "titulo": "FORMATO DE ESTUDIO KAPPA INJ",
+      "campos_encabezado": [
+        "fecha",
+        "modelo",
+        "calificacion",
+        "nombre",
+        "numero_empleado",
+        "area"
+      ],
+      "preguntas": [
+        {
+          "texto": "¿Estas piezas de familia de bezel se fluorinan?",
+          "opciones": [
+            {
+              "clave": "A",
+              "texto": "No"
+            },
+            {
+              "clave": "B",
+              "texto": "Depende el numero de parte."
+            },
+            {
+              "clave": "C",
+              "texto": "Si"
+            }
+          ],
+          "tipo": "opcion_multiple",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        },
+        {
+          "texto": "¿Qué color de etiqueta llavan y porque ?",
+          "opciones": [
+            {
+              "clave": "A",
+              "texto": "Anaranjada, directo a pintura"
+            },
+            {
+              "clave": "B",
+              "texto": "Azul, se fluorina y se pinta"
+            },
+            {
+              "clave": "C",
+              "texto": "Blanca va directo al cliente"
+            }
+          ],
+          "tipo": "opcion_multiple",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        },
+        {
+          "texto": "Señala las partes de la pieza colocando los numeros correspondientes en las flechas",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": "Zona \"A\""
+            },
+            {
+              "clave": "2",
+              "texto": "Zona \"B\""
+            },
+            {
+              "clave": "3",
+              "texto": "Zona \"C\""
+            }
+          ],
+          "tipo": "etiquetar_diagrama",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "nota": "Las flechas son figuras dibujadas sobre la imagen; su posición no se puede mapear a zonas de forma confiable."
+        }
+      ],
+      "casillas_pieza_impresas": 35,
+      "casillas_faltantes_en_formato": [],
+      "columnas_por_pieza": [
+        "Buena",
+        "Mala",
+        "Defecto"
+      ],
+      "numero_piezas_examen": "TODO",
+      "clave_gb": "TODO",
+      "extras": [
+        "INSPECCION",
+        "Firma del empleado:"
+      ],
+      "codigo_documento": "04 C04 S10 35 1"
+    },
+    {
+      "archivo": "2.-EXAMEN BOTON LASEREADO.xlsx",
+      "hoja": "MOLDEO",
+      "md5": "645f7206cfc4b28c1ea5d0ead516bca3",
+      "variante": "principal",
+      "slug": "boton-laser",
+      "modelo": "BOTON ESTAMPADO LASER",
+      "grupo": "ENSAMBLES",
+      "confianza": "alta",
+      "nota": "",
+      "imagenes": [
+        "examenes/boton-laser/image1.png"
+      ],
+      "titulo": "FORMATO DE ESTUDIO KAPPA AREA PINTURA",
+      "campos_encabezado": [
+        "fecha",
+        "modelo",
+        "calificacion",
+        "nombre",
+        "numero_empleado",
+        "area"
+      ],
+      "preguntas": [
+        {
+          "texto": "¿Cuál es el metodo que se utliza para inspeccionar este modelo?",
+          "opciones": [
+            {
+              "clave": "A",
+              "texto": "Cuando se tenga tiempo"
+            },
+            {
+              "clave": "B",
+              "texto": "Inspection visual"
+            },
+            {
+              "clave": "C",
+              "texto": "Solo se empaca"
+            }
+          ],
+          "tipo": "opcion_multiple",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        },
+        {
+          "texto": "Menciona 3 de los principales defectos de esta pieza",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": ""
+            },
+            {
+              "clave": "2",
+              "texto": ""
+            },
+            {
+              "clave": "3",
+              "texto": ""
+            }
+          ],
+          "tipo": "texto_abierto",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "respuestas_esperadas": "TODO"
+        },
+        {
+          "texto": "Señala las partes de la pieza colocando los numeros correspondientes en las flechas",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": "ZONA \"B\""
+            },
+            {
+              "clave": "2",
+              "texto": "ZONA \"A\""
+            },
+            {
+              "clave": "3",
+              "texto": "ZONA \"C\""
+            }
+          ],
+          "tipo": "etiquetar_diagrama",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "nota": "Las flechas son figuras dibujadas sobre la imagen; su posición no se puede mapear a zonas de forma confiable."
+        }
+      ],
+      "casillas_pieza_impresas": 35,
+      "casillas_faltantes_en_formato": [],
+      "columnas_por_pieza": [
+        "Buena",
+        "Mala",
+        "Defecto"
+      ],
+      "numero_piezas_examen": "TODO",
+      "clave_gb": "TODO",
+      "extras": [
+        "INSPECCION"
+      ],
+      "codigo_documento": "04 C04 S10 35 1"
+    },
+    {
+      "archivo": "2.-EXAMEN BOTON SIN LASEREADO.xlsx",
+      "hoja": "MOLDEO",
+      "md5": "b409baa50f1131a53c6e50eec91a3eca",
+      "variante": "principal",
+      "slug": "boton-sin-laser",
+      "modelo": "BOTON SIN ESTAMPADO",
+      "grupo": "ENSAMBLES",
+      "confianza": "alta",
+      "nota": "",
+      "imagenes": [
+        "examenes/boton-sin-laser/image1.png"
+      ],
+      "titulo": "FORMATO DE ESTUDIO KAPPA AREA PINTURA",
+      "campos_encabezado": [
+        "fecha",
+        "modelo",
+        "calificacion",
+        "nombre",
+        "numero_empleado",
+        "area"
+      ],
+      "preguntas": [
+        {
+          "texto": "¿Cuál es el metodo que se utliza para inspeccionar este modelo?",
+          "opciones": [
+            {
+              "clave": "A",
+              "texto": "Cuando se tenga tiempo"
+            },
+            {
+              "clave": "B",
+              "texto": "Inspection visual"
+            },
+            {
+              "clave": "C",
+              "texto": "Solo se empaca"
+            }
+          ],
+          "tipo": "opcion_multiple",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        },
+        {
+          "texto": "Menciona 3 de los principales defectos de esta pieza",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": ""
+            },
+            {
+              "clave": "2",
+              "texto": ""
+            },
+            {
+              "clave": "3",
+              "texto": ""
+            }
+          ],
+          "tipo": "texto_abierto",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "respuestas_esperadas": "TODO"
+        },
+        {
+          "texto": "Señala las partes de la pieza colocando los numeros correspondientes en las flechas",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": "ZONA \"B\""
+            },
+            {
+              "clave": "2",
+              "texto": "ZONA \"A\""
+            },
+            {
+              "clave": "3",
+              "texto": "ZONA \"C\""
+            }
+          ],
+          "tipo": "etiquetar_diagrama",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "nota": "Las flechas son figuras dibujadas sobre la imagen; su posición no se puede mapear a zonas de forma confiable."
+        }
+      ],
+      "casillas_pieza_impresas": 35,
+      "casillas_faltantes_en_formato": [],
+      "columnas_por_pieza": [
+        "Buena",
+        "Mala",
+        "Defecto"
+      ],
+      "numero_piezas_examen": "TODO",
+      "clave_gb": "TODO",
+      "extras": [
+        "INSPECCION"
+      ],
+      "codigo_documento": "04 C04 S10 35 1"
+    },
+    {
+      "archivo": "2.-EXAMEN CUBIERTA.xlsx",
+      "hoja": "MOLDEO",
+      "md5": "0fc0a2c3cf541bd36c08e282acee3918",
+      "variante": "principal",
+      "slug": "cubiertas-pai",
+      "modelo": "CUBIERTAS PAI",
+      "grupo": "PINTURA",
+      "confianza": "media",
+      "nota": "Cubierta de airbag pintada (gris). Título 'AREA PINTURA'.",
+      "imagenes": [
+        "examenes/cubiertas-pai/image1.png"
+      ],
+      "titulo": "FORMATO DE ESTUDIO KAPPA AREA PINTURA",
+      "campos_encabezado": [
+        "fecha",
+        "modelo",
+        "calificacion",
+        "nombre",
+        "numero_empleado",
+        "area"
+      ],
+      "preguntas": [
+        {
+          "texto": "¿Cuál es el metodo que se utliza para inspeccionar este modelo?",
+          "opciones": [
+            {
+              "clave": "A",
+              "texto": "Cuando se tenga tiempo"
+            },
+            {
+              "clave": "B",
+              "texto": "Inspection visual"
+            },
+            {
+              "clave": "C",
+              "texto": "Solo se empaca"
+            }
+          ],
+          "tipo": "opcion_multiple",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        },
+        {
+          "texto": "Menciona 3 de los principales defectos de esta pieza",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": ""
+            },
+            {
+              "clave": "2",
+              "texto": ""
+            },
+            {
+              "clave": "3",
+              "texto": ""
+            }
+          ],
+          "tipo": "texto_abierto",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "respuestas_esperadas": "TODO"
+        },
+        {
+          "texto": "Señala las partes de la pieza colocando los numeros correspondientes en las flechas",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": "ZONA \"B\""
+            },
+            {
+              "clave": "2",
+              "texto": "ZONA \"A\""
+            },
+            {
+              "clave": "3",
+              "texto": "ZONA \"C\""
+            }
+          ],
+          "tipo": "etiquetar_diagrama",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "nota": "Las flechas son figuras dibujadas sobre la imagen; su posición no se puede mapear a zonas de forma confiable."
+        }
+      ],
+      "casillas_pieza_impresas": 35,
+      "casillas_faltantes_en_formato": [],
+      "columnas_por_pieza": [
+        "Buena",
+        "Mala",
+        "Defecto"
+      ],
+      "numero_piezas_examen": "TODO",
+      "clave_gb": "TODO",
+      "extras": [
+        "INSPECCION",
+        "firma"
+      ],
+      "codigo_documento": "04 C04 S10 35 1"
+    },
+    {
+      "archivo": "2.-EXAMEN CUBIERTAS.xlsx",
+      "hoja": "MOLDEO",
+      "md5": "b3dd9d21f5446d1c6c2e9ea390dcbd8c",
+      "variante": "principal",
+      "slug": "cubiertas-inj",
+      "modelo": "FAMILIA CUBIERTAS (PAB/DAB)",
+      "grupo": "MOLDEO",
+      "confianza": "alta",
+      "nota": "Título 'KAPPA CUBIERTAS INJ'. Celda I60 con #VALUE! (residuo).",
+      "imagenes": [
+        "examenes/cubiertas-inj/image1.jpeg",
+        "examenes/cubiertas-inj/image2.png",
+        "examenes/cubiertas-inj/image3.png",
+        "examenes/cubiertas-inj/image4.png"
+      ],
+      "titulo": "FORMATO DE ESTUDIO KAPPA CUBIERTAS INJ",
+      "campos_encabezado": [
+        "fecha",
+        "modelo",
+        "calificacion",
+        "nombre",
+        "numero_empleado",
+        "area"
+      ],
+      "preguntas": [
+        {
+          "texto": "¿Estas piezas de familia de cubiertas se fluorinan?",
+          "opciones": [
+            {
+              "clave": "A",
+              "texto": "No"
+            },
+            {
+              "clave": "B",
+              "texto": "Solo si lo indica el supervisor."
+            },
+            {
+              "clave": "C",
+              "texto": "Si"
+            }
+          ],
+          "tipo": "opcion_multiple",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        },
+        {
+          "texto": "¿Qué color de estiqueta llavan y porque ?",
+          "opciones": [
+            {
+              "clave": "A",
+              "texto": "Anaranjada, directo a pintura"
+            },
+            {
+              "clave": "B",
+              "texto": "Azul, se fluorina y se pinta"
+            },
+            {
+              "clave": "C",
+              "texto": "Blanca va directo al cliente"
+            }
+          ],
+          "tipo": "opcion_multiple",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        },
+        {
+          "texto": "Señala las partes de la pieza colocando los numeros correspondientes en las flechas",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": "Zona A"
+            },
+            {
+              "clave": "2",
+              "texto": "Zona B"
+            },
+            {
+              "clave": "3",
+              "texto": "Zona C"
+            },
+            {
+              "clave": "4",
+              "texto": "Ultima area en llenar"
+            },
+            {
+              "clave": "5",
+              "texto": "Tearseam"
+            }
+          ],
+          "tipo": "etiquetar_diagrama",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "nota": "Las flechas son figuras dibujadas sobre la imagen; su posición no se puede mapear a zonas de forma confiable."
+        }
+      ],
+      "casillas_pieza_impresas": 35,
+      "casillas_faltantes_en_formato": [],
+      "columnas_por_pieza": [
+        "Buena",
+        "Mala",
+        "Defecto"
+      ],
+      "numero_piezas_examen": "TODO",
+      "clave_gb": "TODO",
+      "extras": [
+        "INSPECCION",
+        "Firma de personal"
+      ],
+      "codigo_documento": "04 C04 S10 35 1"
+    },
+    {
+      "archivo": "2.-EXAMEN HIGH GLOSS ALPINE.xlsx",
+      "hoja": "MOLDEO",
+      "md5": "8eb6c6468f2c198a93aba0525bf7882d",
+      "variante": "principal",
+      "slug": "alto-brillo",
+      "modelo": "ALTO BRILLO (HIGH GLOSS ALPINE)",
+      "grupo": "PINTURA",
+      "confianza": "alta",
+      "nota": "",
+      "imagenes": [
+        "examenes/alto-brillo/image1.png"
+      ],
+      "titulo": "FORMATO DE ESTUDIO KAPPA AREA PINTURA",
+      "campos_encabezado": [
+        "fecha",
+        "modelo",
+        "calificacion",
+        "nombre",
+        "numero_empleado",
+        "area"
+      ],
+      "preguntas": [
+        {
+          "texto": "¿Cuál es el metodo que se utliza para inspeccionar este modelo?",
+          "opciones": [
+            {
+              "clave": "A",
+              "texto": "Cuando se tenga tiempo"
+            },
+            {
+              "clave": "B",
+              "texto": "Inspection visual"
+            },
+            {
+              "clave": "C",
+              "texto": "Solo se empaca"
+            }
+          ],
+          "tipo": "opcion_multiple",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        },
+        {
+          "texto": "Menciona 3 de los principales defectos de esta pieza",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": ""
+            },
+            {
+              "clave": "2",
+              "texto": ""
+            },
+            {
+              "clave": "3",
+              "texto": ""
+            }
+          ],
+          "tipo": "texto_abierto",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "respuestas_esperadas": "TODO"
+        },
+        {
+          "texto": "Señala las partes de la pieza colocando los numeros correspondientes en las flechas",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": "AREA DE PANTALLA"
+            },
+            {
+              "clave": "2",
+              "texto": "ZONA \"A\""
+            },
+            {
+              "clave": "3",
+              "texto": "BOTONERA"
+            },
+            {
+              "clave": "4",
+              "texto": "CANDADOS"
+            }
+          ],
+          "tipo": "etiquetar_diagrama",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "nota": "Las flechas son figuras dibujadas sobre la imagen; su posición no se puede mapear a zonas de forma confiable."
+        },
+        {
+          "texto": "¿Se necesita algun equipo o herramienta especial para inspeccionar este modelo?",
+          "opciones": [
+            {
+              "clave": "SI",
+              "texto": "Si"
+            },
+            {
+              "clave": "NO",
+              "texto": "No"
+            }
+          ],
+          "tipo": "si_no",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        },
+        {
+          "texto": "Si la respuesta anterior es SI, ¿Selecciona el inciso que describe el material necesario.",
+          "opciones": [
+            {
+              "clave": "A",
+              "texto": "Zapatos de seguridad y lentes"
+            },
+            {
+              "clave": "B",
+              "texto": "Lentes y guantes"
+            },
+            {
+              "clave": "C",
+              "texto": "Mi equipo de seguridad y guantes y trapos de microfibra"
+            }
+          ],
+          "tipo": "opcion_multiple",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        }
+      ],
+      "casillas_pieza_impresas": 35,
+      "casillas_faltantes_en_formato": [],
+      "columnas_por_pieza": [
+        "Buena",
+        "Mala",
+        "Defecto"
+      ],
+      "numero_piezas_examen": "TODO",
+      "clave_gb": "TODO",
+      "extras": [
+        "INSPECCION"
+      ],
+      "codigo_documento": "04 C04 S10 35 1"
+    },
+    {
+      "archivo": "2.-EXAMEN HIGHAND.xlsx",
+      "hoja": "MOLDEO",
+      "md5": "92a01398827d33e2b4af0195b5848761",
+      "variante": "principal",
+      "slug": "highland",
+      "modelo": "HIGHLAND",
+      "grupo": "ENSAMBLES",
+      "confianza": "alta",
+      "nota": "Hoja1 es copia sin bloque de práctica de 3 días ni firma de calidad.",
+      "imagenes": [
+        "examenes/highland/image1.png"
+      ],
+      "titulo": "FORMATO DE ESTUDIO KAPPA",
+      "campos_encabezado": [
+        "fecha",
+        "modelo",
+        "calificacion",
+        "nombre",
+        "numero_empleado",
+        "area"
+      ],
+      "preguntas": [
+        {
+          "texto": "¿Cuál es el metodo que se utliza para inspeccionar este modelo?",
+          "opciones": [
+            {
+              "clave": "A",
+              "texto": "Touch inspection"
+            },
+            {
+              "clave": "B",
+              "texto": "Sin inspeccion"
+            },
+            {
+              "clave": "C",
+              "texto": "Solo se empaca"
+            }
+          ],
+          "tipo": "opcion_multiple",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        },
+        {
+          "texto": "Menciona 3 de los principales defectos de esta pieza",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": ""
+            },
+            {
+              "clave": "2",
+              "texto": ""
+            },
+            {
+              "clave": "3",
+              "texto": ""
+            }
+          ],
+          "tipo": "texto_abierto",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "respuestas_esperadas": "TODO"
+        },
+        {
+          "texto": "Señala las partes de la pieza colocando los numeros correspondientes en las flechas",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": "ZONA \"A\""
+            },
+            {
+              "clave": "2",
+              "texto": "ZONA \"B\""
+            },
+            {
+              "clave": "3",
+              "texto": "ZON \"C\""
+            }
+          ],
+          "tipo": "etiquetar_diagrama",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "nota": "Las flechas son figuras dibujadas sobre la imagen; su posición no se puede mapear a zonas de forma confiable."
+        }
+      ],
+      "casillas_pieza_impresas": 35,
+      "casillas_faltantes_en_formato": [],
+      "columnas_por_pieza": [
+        "Buena",
+        "Mala",
+        "Defecto"
+      ],
+      "numero_piezas_examen": "TODO",
+      "clave_gb": "TODO",
+      "extras": [
+        "INSPECCION",
+        "PRACTICA DE 3 DIAS (cuando es 1ª certi.)",
+        "fecha",
+        "1er dia",
+        "2do dia",
+        "3er dia",
+        "Firma de operador:",
+        "Firma de calidad:"
+      ],
+      "codigo_documento": "04 C04 S10 35 1"
+    },
+    {
+      "archivo": "2.-EXAMEN HIGHAND.xlsx",
+      "hoja": "Hoja1",
+      "md5": "92a01398827d33e2b4af0195b5848761",
+      "variante": "sin_practica",
+      "slug": "highland",
+      "modelo": "HIGHLAND",
+      "grupo": "ENSAMBLES",
+      "confianza": "alta",
+      "nota": "Hoja1 es copia sin bloque de práctica de 3 días ni firma de calidad.",
+      "imagenes": [
+        "examenes/highland/image1.png"
+      ],
+      "titulo": "FORMATO DE ESTUDIO KAPPA",
+      "campos_encabezado": [
+        "fecha",
+        "modelo",
+        "calificacion",
+        "nombre",
+        "numero_empleado",
+        "area"
+      ],
+      "preguntas": [
+        {
+          "texto": "¿Cuál es el metodo que se utliza para inspeccionar este modelo?",
+          "opciones": [
+            {
+              "clave": "A",
+              "texto": "Touch inspection"
+            },
+            {
+              "clave": "B",
+              "texto": "Sin inspeccion"
+            },
+            {
+              "clave": "C",
+              "texto": "Solo se empaca"
+            }
+          ],
+          "tipo": "opcion_multiple",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        },
+        {
+          "texto": "Menciona 3 de los principales defectos de esta pieza",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": ""
+            },
+            {
+              "clave": "2",
+              "texto": ""
+            },
+            {
+              "clave": "3",
+              "texto": ""
+            }
+          ],
+          "tipo": "texto_abierto",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "respuestas_esperadas": "TODO"
+        },
+        {
+          "texto": "Señala las partes de la pieza colocando los numeros correspondientes en las flechas",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": "ZONA \"A\""
+            },
+            {
+              "clave": "2",
+              "texto": "ZONA \"B\""
+            },
+            {
+              "clave": "3",
+              "texto": "ZON \"C\""
+            }
+          ],
+          "tipo": "etiquetar_diagrama",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "nota": "Las flechas son figuras dibujadas sobre la imagen; su posición no se puede mapear a zonas de forma confiable."
+        }
+      ],
+      "casillas_pieza_impresas": 35,
+      "casillas_faltantes_en_formato": [],
+      "columnas_por_pieza": [
+        "Buena",
+        "Mala",
+        "Defecto"
+      ],
+      "numero_piezas_examen": "TODO",
+      "clave_gb": "TODO",
+      "extras": [
+        "Firma de operador:"
+      ],
+      "codigo_documento": "04 C04 S10 35 1"
+    },
+    {
+      "archivo": "2.-EXAMEN HONDA 18RM.xlsx",
+      "hoja": "1er vez",
+      "md5": "46f77ea5aa76f9ae9e780ef10d126b10",
+      "variante": "primera_certificacion",
+      "slug": "18rm",
+      "modelo": "18RM 220D GARNISH (RIFLE)",
+      "grupo": "ENSAMBLES",
+      "confianza": "alta",
+      "nota": "Dos variantes: '1er vez' (con práctica de 3 días) y 'anual' (re-certificación).",
+      "imagenes": [
+        "examenes/18rm/image1.png"
+      ],
+      "titulo": "FORMATO DE ESTUDIO KAPPA",
+      "campos_encabezado": [
+        "fecha",
+        "modelo",
+        "calificacion",
+        "nombre",
+        "numero_empleado",
+        "area"
+      ],
+      "preguntas": [
+        {
+          "texto": "¿Cuál es el metodo que se utliza para inspeccionar este modelo?",
+          "opciones": [
+            {
+              "clave": "A",
+              "texto": "No se inspecciona"
+            },
+            {
+              "clave": "B",
+              "texto": "Touch inspection"
+            },
+            {
+              "clave": "C",
+              "texto": "Solo se empaca"
+            }
+          ],
+          "tipo": "opcion_multiple",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        },
+        {
+          "texto": "Menciona 3 de los principales defectos de esta pieza",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": ""
+            },
+            {
+              "clave": "2",
+              "texto": ""
+            },
+            {
+              "clave": "3",
+              "texto": ""
+            }
+          ],
+          "tipo": "texto_abierto",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "respuestas_esperadas": "TODO"
+        },
+        {
+          "texto": "Señala las partes de la pieza colocando los numeros correspondientes en las flechas",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": "ZONA \"A\""
+            },
+            {
+              "clave": "2",
+              "texto": "ZONA \"B\""
+            },
+            {
+              "clave": "3",
+              "texto": "ZONA \"C\""
+            }
+          ],
+          "tipo": "etiquetar_diagrama",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "nota": "Las flechas son figuras dibujadas sobre la imagen; su posición no se puede mapear a zonas de forma confiable."
+        },
+        {
+          "texto": "¿ En el ensamble final cuantos clips lleva?",
+          "opciones": [
+            {
+              "clave": "A",
+              "texto": "11"
+            },
+            {
+              "clave": "B",
+              "texto": "12"
+            },
+            {
+              "clave": "C",
+              "texto": "13"
+            }
+          ],
+          "tipo": "opcion_multiple",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        },
+        {
+          "texto": "Cuantos felt tape lleva ?",
+          "opciones": [
+            {
+              "clave": "A",
+              "texto": "4"
+            },
+            {
+              "clave": "B",
+              "texto": "6"
+            },
+            {
+              "clave": "C",
+              "texto": "8"
+            }
+          ],
+          "tipo": "opcion_multiple",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        }
+      ],
+      "casillas_pieza_impresas": 35,
+      "casillas_faltantes_en_formato": [
+        5
+      ],
+      "columnas_por_pieza": [
+        "Buena",
+        "Mala",
+        "Defecto"
+      ],
+      "numero_piezas_examen": "TODO",
+      "clave_gb": "TODO",
+      "extras": [
+        "INSPECCION",
+        "PRACTICA DE 3 DIAS (cuando es 1ª certi.)",
+        "fecha",
+        "2da inpeccion por:",
+        "1er dia",
+        "2do dia",
+        "3er dia",
+        "Firma de operador:",
+        "Firma de calidad:"
+      ],
+      "codigo_documento": "04 C04 S10 35 1"
+    },
+    {
+      "archivo": "2.-EXAMEN HONDA 18RM.xlsx",
+      "hoja": "anual",
+      "md5": "46f77ea5aa76f9ae9e780ef10d126b10",
+      "variante": "anual",
+      "slug": "18rm",
+      "modelo": "18RM 220D GARNISH (RIFLE)",
+      "grupo": "ENSAMBLES",
+      "confianza": "alta",
+      "nota": "Dos variantes: '1er vez' (con práctica de 3 días) y 'anual' (re-certificación).",
+      "imagenes": [
+        "examenes/18rm/image1.png"
+      ],
+      "titulo": "FORMATO DE ESTUDIO KAPPA",
+      "campos_encabezado": [
+        "fecha",
+        "modelo",
+        "calificacion",
+        "nombre",
+        "numero_empleado",
+        "area"
+      ],
+      "preguntas": [
+        {
+          "texto": "¿Cuál es el metodo que se utliza para inspeccionar este modelo?",
+          "opciones": [
+            {
+              "clave": "A",
+              "texto": "No se inspecciona"
+            },
+            {
+              "clave": "B",
+              "texto": "Touch inspection"
+            },
+            {
+              "clave": "C",
+              "texto": "Solo se empaca"
+            }
+          ],
+          "tipo": "opcion_multiple",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        },
+        {
+          "texto": "Menciona 3 de los principales defectos de esta pieza",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": ""
+            },
+            {
+              "clave": "2",
+              "texto": ""
+            },
+            {
+              "clave": "3",
+              "texto": ""
+            }
+          ],
+          "tipo": "texto_abierto",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "respuestas_esperadas": "TODO"
+        },
+        {
+          "texto": "Señala las partes de la pieza colocando los numeros correspondientes en las flechas",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": "ZONA \"A\""
+            },
+            {
+              "clave": "2",
+              "texto": "ZONA \"B\""
+            },
+            {
+              "clave": "3",
+              "texto": "ZONA \"C\""
+            }
+          ],
+          "tipo": "etiquetar_diagrama",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "nota": "Las flechas son figuras dibujadas sobre la imagen; su posición no se puede mapear a zonas de forma confiable."
+        },
+        {
+          "texto": "¿ En el ensamble final cuantos clips lleva?",
+          "opciones": [
+            {
+              "clave": "A",
+              "texto": "11"
+            },
+            {
+              "clave": "B",
+              "texto": "12"
+            },
+            {
+              "clave": "C",
+              "texto": "13"
+            }
+          ],
+          "tipo": "opcion_multiple",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        },
+        {
+          "texto": "Cuantos felt tape lleva ?",
+          "opciones": [
+            {
+              "clave": "A",
+              "texto": "4"
+            },
+            {
+              "clave": "B",
+              "texto": "6"
+            },
+            {
+              "clave": "C",
+              "texto": "8"
+            }
+          ],
+          "tipo": "opcion_multiple",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        }
+      ],
+      "casillas_pieza_impresas": 35,
+      "casillas_faltantes_en_formato": [],
+      "columnas_por_pieza": [
+        "Buena",
+        "Mala",
+        "Defecto"
+      ],
+      "numero_piezas_examen": "TODO",
+      "clave_gb": "TODO",
+      "extras": [
+        "INSPECCION",
+        "Firma de operador:"
+      ],
+      "codigo_documento": "04 C04 S10 35 1"
+    },
+    {
+      "archivo": "2.-EXAMEN HONDA KEYLESS.xlsx",
+      "hoja": "MOLDEO",
+      "md5": "b9270449ff6560cebe85be4ae9d9dc85",
+      "variante": "principal",
+      "slug": "keyless",
+      "modelo": "KEYLESS",
+      "grupo": "ENSAMBLES",
+      "confianza": "alta",
+      "nota": "Hoja1 es variante sin preguntas de equipo/herramienta.",
+      "imagenes": [
+        "examenes/keyless/image1.png",
+        "examenes/keyless/image2.jpeg"
+      ],
+      "titulo": "FORMATO DE ESTUDIO KAPPA",
+      "campos_encabezado": [
+        "fecha",
+        "modelo",
+        "calificacion",
+        "nombre",
+        "numero_empleado",
+        "area"
+      ],
+      "preguntas": [
+        {
+          "texto": "¿Cuál es el metodo que se utliza para inspeccionar este modelo?",
+          "opciones": [
+            {
+              "clave": "A",
+              "texto": "No se inspecciona"
+            },
+            {
+              "clave": "B",
+              "texto": "Solo visual"
+            },
+            {
+              "clave": "C",
+              "texto": "Solo se empaca"
+            }
+          ],
+          "tipo": "opcion_multiple",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        },
+        {
+          "texto": "Menciona 3 de los principales defectos de esta pieza",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": ""
+            },
+            {
+              "clave": "2",
+              "texto": ""
+            },
+            {
+              "clave": "3",
+              "texto": ""
+            }
+          ],
+          "tipo": "texto_abierto",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "respuestas_esperadas": "TODO"
+        },
+        {
+          "texto": "Señala las partes de la pieza colocando los numeros correspondientes en las flechas",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": "RANURAS"
+            },
+            {
+              "clave": "2",
+              "texto": "VENTANA"
+            },
+            {
+              "clave": "3",
+              "texto": "ZONA \"A\""
+            },
+            {
+              "clave": "4",
+              "texto": "ZONA \"B\""
+            },
+            {
+              "clave": "5",
+              "texto": "ZONA \"C\""
+            }
+          ],
+          "tipo": "etiquetar_diagrama",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "nota": "Las flechas son figuras dibujadas sobre la imagen; su posición no se puede mapear a zonas de forma confiable."
+        },
+        {
+          "texto": "¿Se necesita algun equipo o herramienta especial para inspeccionar este modelo?",
+          "opciones": [
+            {
+              "clave": "SI",
+              "texto": "Si"
+            },
+            {
+              "clave": "NO",
+              "texto": "No"
+            }
+          ],
+          "tipo": "si_no",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        },
+        {
+          "texto": "Si la respuesta anterior es SI, ¿Selecciona el inciso que describe el material necesario?",
+          "opciones": [
+            {
+              "clave": "A",
+              "texto": "Zapatos de seguridad y lentes"
+            },
+            {
+              "clave": "B",
+              "texto": "Lentes y bata"
+            },
+            {
+              "clave": "C",
+              "texto": "Guantes y bata"
+            }
+          ],
+          "tipo": "opcion_multiple",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        }
+      ],
+      "casillas_pieza_impresas": 35,
+      "casillas_faltantes_en_formato": [],
+      "columnas_por_pieza": [
+        "Buena",
+        "Mala",
+        "Defecto"
+      ],
+      "numero_piezas_examen": "TODO",
+      "clave_gb": "TODO",
+      "extras": [
+        "INSPECCION",
+        "PRACTICA DE 3 DIAS (cuando es 1ª certi.)",
+        "fecha",
+        "2da inpeccion por:",
+        "1er dia",
+        "2do dia",
+        "3er dia",
+        "Firma de operador:",
+        "Firma de calidad:"
+      ],
+      "codigo_documento": "04 C04 S10 35 1"
+    },
+    {
+      "archivo": "2.-EXAMEN HONDA KEYLESS.xlsx",
+      "hoja": "Hoja1",
+      "md5": "b9270449ff6560cebe85be4ae9d9dc85",
+      "variante": "corta",
+      "slug": "keyless",
+      "modelo": "KEYLESS",
+      "grupo": "ENSAMBLES",
+      "confianza": "alta",
+      "nota": "Hoja1 es variante sin preguntas de equipo/herramienta.",
+      "imagenes": [
+        "examenes/keyless/image1.png",
+        "examenes/keyless/image2.jpeg"
+      ],
+      "titulo": "FORMATO DE ESTUDIO KAPPA",
+      "campos_encabezado": [
+        "fecha",
+        "modelo",
+        "calificacion",
+        "nombre",
+        "numero_empleado",
+        "area"
+      ],
+      "preguntas": [
+        {
+          "texto": "¿Cuál es el metodo que se utliza para inspeccionar este modelo?",
+          "opciones": [
+            {
+              "clave": "A",
+              "texto": "No se inspecciona"
+            },
+            {
+              "clave": "B",
+              "texto": "Solo visual"
+            },
+            {
+              "clave": "C",
+              "texto": "Solo se empaca"
+            }
+          ],
+          "tipo": "opcion_multiple",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        },
+        {
+          "texto": "Menciona 3 de los principales defectos de esta pieza",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": ""
+            },
+            {
+              "clave": "2",
+              "texto": ""
+            },
+            {
+              "clave": "3",
+              "texto": ""
+            }
+          ],
+          "tipo": "texto_abierto",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "respuestas_esperadas": "TODO"
+        },
+        {
+          "texto": "Señala las partes de la pieza colocando los numeros correspondientes en las flechas",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": "RANURAS"
+            },
+            {
+              "clave": "2",
+              "texto": "VENTANA"
+            },
+            {
+              "clave": "3",
+              "texto": "ZONA \"A\""
+            },
+            {
+              "clave": "4",
+              "texto": "ZONA \"B\""
+            },
+            {
+              "clave": "5",
+              "texto": "ZONA \"C\""
+            }
+          ],
+          "tipo": "etiquetar_diagrama",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "nota": "Las flechas son figuras dibujadas sobre la imagen; su posición no se puede mapear a zonas de forma confiable."
+        }
+      ],
+      "casillas_pieza_impresas": 35,
+      "casillas_faltantes_en_formato": [],
+      "columnas_por_pieza": [
+        "Buena",
+        "Mala",
+        "Defecto"
+      ],
+      "numero_piezas_examen": "TODO",
+      "clave_gb": "TODO",
+      "extras": [
+        "INSPECCION",
+        "Firma del personal:"
+      ],
+      "codigo_documento": "04 C04 S10 35 1"
+    },
+    {
+      "archivo": "2.-EXAMNE BASE SWITH.xlsx",
+      "hoja": "MOLDEO",
+      "md5": "7525e14f9a8df82d95027ade44ef7d6b",
+      "variante": "principal",
+      "slug": "base-switch",
+      "modelo": "BASE SWITCH",
+      "grupo": "TODO",
+      "confianza": "baja",
+      "nota": "No aparece en la matriz ILUO ni en PROMEDIOS. ¿Corresponde a RAPTOR, VOLVO, CDX o HUD BEZEL?",
+      "imagenes": [
+        "examenes/base-switch/image1.png"
+      ],
+      "titulo": "FORMATO DE ESTUDIO KAPPA",
+      "campos_encabezado": [
+        "fecha",
+        "modelo",
+        "calificacion",
+        "nombre",
+        "numero_empleado",
+        "area"
+      ],
+      "preguntas": [
+        {
+          "texto": "¿Cuál es el metodo que se utliza para inspeccionar este modelo?",
+          "opciones": [
+            {
+              "clave": "A",
+              "texto": "Cuando se tenga tiempo"
+            },
+            {
+              "clave": "B",
+              "texto": "Inspection visual"
+            },
+            {
+              "clave": "C",
+              "texto": "Solo se empaca"
+            }
+          ],
+          "tipo": "opcion_multiple",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        },
+        {
+          "texto": "Menciona 3 de los principales defectos de esta pieza",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": ""
+            },
+            {
+              "clave": "2",
+              "texto": ""
+            },
+            {
+              "clave": "3",
+              "texto": ""
+            }
+          ],
+          "tipo": "texto_abierto",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "respuestas_esperadas": "TODO"
+        },
+        {
+          "texto": "Señala las partes de la pieza colocando los numeros correspondientes en las flechas",
+          "opciones": [
+            {
+              "clave": "1",
+              "texto": "ZONA \"A\""
+            },
+            {
+              "clave": "2",
+              "texto": "ZONA \"B\""
+            },
+            {
+              "clave": "3",
+              "texto": "ZONA \"C\""
+            },
+            {
+              "clave": "4",
+              "texto": "ORIFICIOS"
+            },
+            {
+              "clave": "5",
+              "texto": "VENTANA"
+            }
+          ],
+          "tipo": "etiquetar_diagrama",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO",
+          "nota": "Las flechas son figuras dibujadas sobre la imagen; su posición no se puede mapear a zonas de forma confiable."
+        },
+        {
+          "texto": "¿Se necesita algun equipo o herramienta especial para inspeccionar este modelo?",
+          "opciones": [
+            {
+              "clave": "SI",
+              "texto": "Si"
+            },
+            {
+              "clave": "NO",
+              "texto": "No"
+            }
+          ],
+          "tipo": "si_no",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        },
+        {
+          "texto": "Si la respuesta anterior es SI, ¿Selecciona el inciso que describe el material necesario?",
+          "opciones": [
+            {
+              "clave": "A",
+              "texto": "Pinzas, pin"
+            },
+            {
+              "clave": "B",
+              "texto": "lijas,lupa"
+            },
+            {
+              "clave": "C",
+              "texto": "Mi equipo de seguridad."
+            }
+          ],
+          "tipo": "opcion_multiple",
+          "respuesta_correcta": "TODO",
+          "puntaje": "TODO"
+        }
+      ],
+      "casillas_pieza_impresas": 35,
+      "casillas_faltantes_en_formato": [],
+      "columnas_por_pieza": [
+        "Buena",
+        "Mala",
+        "Defecto"
+      ],
+      "numero_piezas_examen": "TODO",
+      "clave_gb": "TODO",
+      "extras": [
+        "INSPECCION"
+      ],
+      "codigo_documento": "04 C04 S10 35 1"
+    }
+  ]
+}

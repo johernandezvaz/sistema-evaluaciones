@@ -1,0 +1,143 @@
+﻿@import "tailwindcss";
+
+@theme {
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-white: #ffffff;
+
+  --color-primary: #1d559a;
+  --color-primary-deep: #17467f;
+  --color-primary-soft: #e8eef6;
+  --color-navy: #0e254e;
+  --color-navy-soft: #16305f;
+
+  --color-ink: #0e254e;
+  --color-ink-secondary: #1f2a3d;
+  --color-ink-mute: #5b6577;
+  --color-ink-mute-2: #8a92a3;
+  --color-ink-faint: #b4bac6;
+  --color-on-primary: #ffffff;
+  --color-on-dark: #ffffff;
+
+  --color-canvas: #ffffff;
+  --color-canvas-soft: #f5f6f9;
+  --color-hairline: #dfe1e7;
+  --color-hairline-strong: #c5c9d3;
+
+  --color-status-fail: #c62828;
+  --color-status-fail-soft: #fdecec;
+  --color-status-warn: #b26a00;
+  --color-status-warn-soft: #fff4e0;
+  --color-status-ok: #1b7f4b;
+  --color-status-ok-soft: #e6f4ec;
+  --color-status-neutral: #5b6577;
+  --color-status-neutral-soft: #eef0f4;
+
+  --font-sans: var(--font-inter), "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, Menlo, Consolas, monospace;
+  --font-weight-semibold: 500;
+  --font-weight-bold: 500;
+
+  --text-display-xl: 40px;
+  --text-display-xl--line-height: 1.1;
+  --text-display-xl--letter-spacing: -1.2px;
+  --text-display-xl--font-weight: 500;
+  --text-display-lg: 32px;
+  --text-display-lg--line-height: 1.15;
+  --text-display-lg--letter-spacing: -0.64px;
+  --text-display-lg--font-weight: 500;
+  --text-display-md: 26px;
+  --text-display-md--line-height: 1.2;
+  --text-display-md--letter-spacing: -0.4px;
+  --text-display-md--font-weight: 500;
+  --text-heading-lg: 20px;
+  --text-heading-lg--line-height: 1.25;
+  --text-heading-lg--font-weight: 500;
+  --text-heading-md: 17px;
+  --text-heading-md--line-height: 1.4;
+  --text-heading-md--font-weight: 500;
+  --text-body-lg: 17px;
+  --text-body-lg--line-height: 1.55;
+  --text-body-md: 15px;
+  --text-body-md--line-height: 1.5;
+  --text-button-md: 14px;
+  --text-button-md--line-height: 1;
+  --text-button-md--font-weight: 500;
+  --text-caption: 13px;
+  --text-caption--line-height: 1.45;
+  --text-micro: 12px;
+  --text-micro--line-height: 1.4;
+  --text-micro--font-weight: 500;
+
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  --shadow-1: 0 1px 3px rgba(14, 37, 78, 0.06);
+  --shadow-2: 0 8px 24px rgba(14, 37, 78, 0.08);
+  --shadow-3: 0 16px 48px rgba(14, 37, 78, 0.12);
+
+  --spacing-sidebar: 240px;
+  --spacing-sidebar-collapsed: 64px;
+  --container-app: 1280px;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-canvas-soft font-sans text-body-md text-ink antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 500;
+  }
+  table,
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
+
+@utility btn {
+  @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-sm px-4 py-2 text-button-md transition-colors disabled:cursor-not-allowed disabled:opacity-50;
+}
+@utility btn-primary {
+  @apply btn bg-primary text-on-primary hover:bg-primary-deep;
+}
+@utility btn-secondary {
+  @apply btn border border-hairline-strong bg-canvas text-ink hover:bg-canvas-soft;
+}
+@utility btn-on-dark {
+  @apply btn bg-navy text-on-dark hover:bg-navy-soft;
+}
+@utility btn-danger {
+  @apply btn border border-status-fail bg-canvas text-status-fail hover:bg-status-fail-soft;
+}
+@utility input {
+  @apply w-full rounded-sm border border-hairline bg-canvas px-3 py-2 text-body-md text-ink placeholder:text-ink-faint focus:border-primary focus:ring-2 focus:ring-primary/30 focus:outline-none;
+}
+@utility label {
+  @apply mb-1 block text-caption text-ink-mute;
+}
+@utility card {
+  @apply rounded-lg border border-hairline bg-canvas p-6;
+}
+@utility card-dark {
+  @apply rounded-lg bg-navy p-6 text-on-dark;
+}
+@utility stat-tile {
+  @apply rounded-lg border border-hairline bg-canvas p-5;
+}
+@utility pill {
+  @apply inline-flex items-center rounded-full px-2 py-0.5 text-micro;
+}
